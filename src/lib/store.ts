@@ -138,18 +138,19 @@ export async function saveContactMessage(data: {
   phone?: string;
   subject: string;
   message: string;
+  website?: string;
 }): Promise<void> {
   await apiFetch("/contact", { method: "POST", ...jsonBody(data) });
 }
 
 export async function saveTicketRequest(
-  data: Omit<TicketRequest, "id" | "status" | "createdAt" | "kind">
+  data: Omit<TicketRequest, "id" | "status" | "createdAt" | "kind"> & { website?: string }
 ): Promise<TicketRequest> {
   return apiFetch("/ticket-requests", { method: "POST", ...jsonBody(data) });
 }
 
 export async function saveCustomEventRequest(
-  data: Omit<CustomEventRequest, "id" | "status" | "createdAt" | "kind">
+  data: Omit<CustomEventRequest, "id" | "status" | "createdAt" | "kind"> & { website?: string }
 ): Promise<CustomEventRequest> {
   return apiFetch("/event-requests", { method: "POST", ...jsonBody(data) });
 }

@@ -5,6 +5,7 @@ import { CalendarDays, Clock, MapPin, Minus, Plus, CheckCircle2 } from "lucide-r
 import { getEventBySlug, saveTicketRequest } from "../lib/store";
 import type { TicketRequest, EventItem } from "../types";
 import LoadingState from "../components/LoadingState";
+import HoneypotField from "../components/HoneypotField";
 
 function formatDate(iso: string) {
   const d = new Date(iso + "T00:00:00");
@@ -111,6 +112,7 @@ function TicketRequestPanel({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [website, setWebsite] = useState("");
 
   function validate() {
     const next: Record<string, string> = {};
@@ -143,6 +145,7 @@ function TicketRequestPanel({
         seatDetails: preference === "specific" ? seatDetails : undefined,
         budget,
         notes,
+        website,
       });
       setSubmitted(record);
     } catch (err) {
@@ -195,6 +198,7 @@ function TicketRequestPanel({
       </p>
 
       <form className="mt-6 space-y-5" onSubmit={handleSubmit} noValidate>
+        <HoneypotField value={website} onChange={setWebsite} />
         <div>
           <label className="text-sm font-medium text-ink">Number of tickets</label>
           <div className="mt-2 flex w-fit items-center gap-4 rounded-full border border-paper-line px-2 py-1.5">

@@ -11,13 +11,22 @@ from .email_service import (
     notify_new_event_request,
     notify_new_ticket_request,
 )
-from .extensions import db
+from .extensions import db, limiter
 from .models import Category, ContactMessage, CustomEventRequest, Event, TicketRequest, make_reference
 
 api_bp = Blueprint("api", __name__)
 
 REQUIRED_EVENT_FIELDS = ["name", "category", "date", "venue", "city"]
 VALID_STATUSES = {"Pending", "Contacted", "Confirmed", "Closed", "Cancelled"}
+
+
+def is_bot_submission(data: dict) -> bool:
+    """
+    Honeypot check: the frontend includes a hidden field real visitors
+    never see or fill in. Simple bots that auto-fill every field on a
+    form end up filling this one too, giving them away.
+    """
+    return bool(str(data.get("website", "")).strip())
 
 
 def slugify(name: str) -> str:
@@ -220,8 +229,15 @@ def upload_image():
 # --------------------------------------------------------------------------
 
 @api_bp.post("/contact")
+@limiter.limit("5 per hour")
 def create_contact_message():
     data = request.get_json(silent=True) or {}
+
+    if is_bot_submission(data):
+        # Pretend it worked so the bot doesn't learn it was caught —
+        # nothing is actually saved.
+        return jsonify({"id": make_reference("MSG"), "status": "Pending"}), 201
+
     required = ["firstName", "lastName", "email", "subject", "message"]
     missing = [f for f in required if not str(data.get(f, "")).strip()]
     if missing:
@@ -254,8 +270,13 @@ def create_contact_message():
 # --------------------------------------------------------------------------
 
 @api_bp.post("/ticket-requests")
+@limiter.limit("10 per hour")
 def create_ticket_request():
     data = request.get_json(silent=True) or {}
+
+    if is_bot_submission(data):
+        return jsonify({"id": make_reference("TKT"), "status": "Pending"}), 201
+
     required = ["firstName", "lastName", "email", "phone", "eventId", "eventName"]
     missing = [f for f in required if not str(data.get(f, "")).strip()]
     if missing:
@@ -288,8 +309,13 @@ def create_ticket_request():
 
 
 @api_bp.post("/event-requests")
+@limiter.limit("10 per hour")
 def create_event_request():
     data = request.get_json(silent=True) or {}
+
+    if is_bot_submission(data):
+        return jsonify({"id": make_reference("EVT"), "status": "Pending"}), 201
+
     required = ["firstName", "lastName", "email", "phone", "eventName"]
     missing = [f for f in required if not str(data.get(f, "")).strip()]
     if missing:

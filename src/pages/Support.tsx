@@ -3,6 +3,7 @@ import type { FormEvent, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Mail, MessageCircle, Phone } from "lucide-react";
 import { saveContactMessage } from "../lib/store";
+import HoneypotField from "../components/HoneypotField";
 
 const faqs = [
   {
@@ -27,7 +28,7 @@ const faqs = [
   },
 ];
 
-const initialForm = { firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" };
+const initialForm = { firstName: "", lastName: "", email: "", phone: "", subject: "", message: "", website: "" };
 
 export default function Support() {
   const [form, setForm] = useState(initialForm);
@@ -118,6 +119,7 @@ export default function Support() {
           </div>
 
           <form onSubmit={submit} className="rounded-2xl border border-paper-line bg-white p-6 shadow-sm md:p-8">
+            <HoneypotField value={form.website} onChange={(v) => update("website", v)} />
             <h2 className="font-display text-2xl font-semibold text-ink">Send us a message</h2>
             <p className="mt-2 text-sm text-ink-soft">Fields marked with * are required.</p>
 

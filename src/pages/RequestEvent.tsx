@@ -4,6 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { getCategories, saveCustomEventRequest } from "../lib/store";
 import { usStates } from "../data/usStates";
+import HoneypotField from "../components/HoneypotField";
 import type { CustomEventRequest } from "../types";
 
 export default function RequestEvent() {
@@ -43,6 +44,7 @@ export default function RequestEvent() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [website, setWebsite] = useState("");
 
   function validate() {
     const next: Record<string, string> = {};
@@ -78,6 +80,7 @@ export default function RequestEvent() {
         budget,
         flexibility,
         notes,
+        website,
       });
       setSubmitted(record);
     } catch (err) {
@@ -136,6 +139,7 @@ export default function RequestEvent() {
         noValidate
         className="mx-auto max-w-2xl space-y-10 px-5 py-12 md:px-8"
       >
+        <HoneypotField value={website} onChange={setWebsite} />
         <FormSection title="Your information">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field label="First name" value={firstName} onChange={setFirstName} error={errors.firstName} />

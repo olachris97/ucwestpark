@@ -7,6 +7,8 @@ import RequestEvent from "./pages/RequestEvent";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import Support from "./pages/Support";
 import LegalPage from "./pages/LegalPage";
+import { privacyPolicyIntro, privacyPolicySections } from "./data/privacyPolicy";
+import { termsIntro, termsSections } from "./data/termsOfService";
 import NotFound from "./pages/NotFound";
 import AdminLayout from "./pages/admin/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
@@ -30,10 +32,9 @@ export default function App() {
           element={
             <LegalPage
               title="Privacy Policy"
-              paragraphs={[
-                "This placeholder privacy policy explains, in a production build, how UCwestpark collects and uses information submitted through ticket and event requests.",
-                "Replace this page with your finalized policy before launch.",
-              ]}
+              lastUpdated="September 2026"
+              intro={privacyPolicyIntro}
+              sections={privacyPolicySections}
             />
           }
         />
@@ -42,10 +43,9 @@ export default function App() {
           element={
             <LegalPage
               title="Terms of Service"
-              paragraphs={[
-                "This placeholder terms page explains, in a production build, the terms under which UCwestpark provides its ticket request and sourcing service.",
-                "Replace this page with your finalized terms before launch.",
-              ]}
+              lastUpdated="September 2026"
+              intro={termsIntro}
+              sections={termsSections}
             />
           }
         />

@@ -10,7 +10,7 @@ from flask_cors import CORS
 from .api import api_bp
 from .auth import auth_bp, ensure_default_admin
 from .config import Config
-from .extensions import db
+from .extensions import db, limiter
 from .seed import seed_if_empty
 
 
@@ -21,6 +21,7 @@ def create_app():
     os.makedirs(app.config["UPLOAD_FOLDER"], exist_ok=True)
 
     db.init_app(app)
+    limiter.init_app(app)
     CORS(app, origins=app.config["CORS_ORIGINS"], supports_credentials=True)
 
     app.register_blueprint(api_bp, url_prefix="/api")

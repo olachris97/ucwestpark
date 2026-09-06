@@ -1,0 +1,44 @@
+# Render Blueprint — deploys the Flask backend as a web service with a
+# persistent disk (for the SQLite database and uploaded event photos).
+#
+# To use: push this repo to GitHub/GitLab, then in Render:
+#   New + -> Blueprint -> select this repo -> Apply
+#
+# A few env vars are marked `sync: false`, meaning Render will prompt you
+# to type them in yourself rather than storing them in this file (so
+# secrets never end up committed to your repo).
+
+services:
+  - type: web
+    name: ucwestpark-backend
+    runtime: python
+    plan: starter
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite:////var/data/app.db
+      - key: UPLOAD_FOLDER
+        value: /var/data/uploads
+      - key: CORS_ORIGINS
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: RESEND_FROM_EMAIL
+        value: "UCwestpark Tickets <onboarding@resend.dev>"
+      - key: ADMIN_NOTIFICATION_EMAIL
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+    disk:
+      name: ucwestpark-data
+      mountPath: /var/data
+      sizeGB: 1

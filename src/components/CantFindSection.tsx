@@ -16,7 +16,7 @@ export default function CantFindSection() {
             No problem. Tell us the event, venue, date, and how close you want to park. We'll help you look for an option — even if it isn't listed yet.
           </p>
           <MotionLink
-            to="/request-event"
+            to="/request-parking"
             className="mt-7 inline-block rounded-full bg-gold px-8 py-3.5 text-sm font-semibold text-black"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.98 }}
@@ -28,3 +28,5 @@ export default function CantFindSection() {
     </section>
   );
 }
+
+

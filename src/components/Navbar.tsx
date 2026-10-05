@@ -37,7 +37,7 @@ export default function Navbar() {
         </nav>
 
         <Link
-          to="/request-event"
+          to="/request-parking"
           onClick={() => setOpen(false)}
           className="hidden rounded-full border border-black bg-white px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white md:inline-flex"
         >
@@ -78,7 +78,7 @@ export default function Navbar() {
                   {l.label}
                 </NavLink>
               ))}
-              <Link to="/request-event" onClick={() => setOpen(false)} className="mt-2 rounded-full bg-gold px-4 py-3 text-center text-sm font-semibold text-marquee">Request Parking</Link>
+              <Link to="/request-parking" onClick={() => setOpen(false)} className="mt-2 rounded-full bg-gold px-4 py-3 text-center text-sm font-semibold text-marquee">Request Parking</Link>
             </nav>
           </motion.div>
         )}
@@ -86,3 +86,4 @@ export default function Navbar() {
     </header>
   );
 }
+

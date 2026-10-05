@@ -3,8 +3,8 @@ import { SearchX } from "lucide-react";
 
 export default function EmptyState({ query }: { query: string }) {
   const requestHref = query
-    ? `/request-event?eventName=${encodeURIComponent(query)}`
-    : "/request-event";
+    ? `/request-parking?eventName=${encodeURIComponent(query)}`
+    : "/request-parking";
 
   return (
     <div className="mx-auto flex max-w-md flex-col items-center rounded-2xl border border-dashed border-paper-line bg-white px-8 py-16 text-center">
@@ -33,3 +33,5 @@ export default function EmptyState({ query }: { query: string }) {
     </div>
   );
 }
+
+

@@ -26,7 +26,7 @@ export default function Footer() {
           <FooterColumn
             title="Parking"
             links={[
-              { label: "Request Parking", to: "/request-event" },
+              { label: "Request Parking", to: "/request-parking" },
               { label: "Privacy Policy", to: "/privacy-policy" },
               { label: "Terms of Service", to: "/terms" },
               { label: "Contact Us", to: "/support" },
@@ -60,3 +60,4 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
     </div>
   );
 }
+

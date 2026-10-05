@@ -109,7 +109,7 @@ export default function Support() {
                 <MessageCircle size={19} className="mt-0.5 text-gold-dark" />
                 <p className="text-sm leading-relaxed text-ink-soft">
                   Looking for parking near an event that isn't listed? Use our{" "}
-                  <Link to="/request-event" className="font-semibold text-ink underline underline-offset-2">
+                  <Link to="/request-parking" className="font-semibold text-ink underline underline-offset-2">
                     Request Parking
                   </Link>{" "}
                   form so we can search for it on your behalf.
@@ -179,3 +179,4 @@ function Field({ label, children, className = "" }: { label: string; children: R
     </label>
   );
 }
+

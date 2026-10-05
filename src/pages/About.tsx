@@ -32,7 +32,7 @@ export default function About() {
         <div className="mt-12 rounded-2xl border border-gold/30 bg-white p-8 shadow-sm">
           <h2 className="font-display text-2xl font-bold text-ink">Ready to find parking?</h2>
           <p className="mt-2 max-w-xl text-ink-soft">Choose your venue and tell us what you need.</p>
-          <Link to="/request-event" className="mt-6 inline-block rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-black hover:bg-gold-light">
+          <Link to="/request-parking" className="mt-6 inline-block rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-black hover:bg-gold-light">
             Request Parking
           </Link>
         </div>
@@ -40,3 +40,4 @@ export default function About() {
     </div>
   );
 }
+

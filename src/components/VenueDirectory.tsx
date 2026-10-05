@@ -67,7 +67,7 @@ export default function VenueDirectory() {
           {visibleLocations.map((location) => {
             const params = new URLSearchParams({ venue: location.venue, city: location.city, state: location.state, region: location.region, locationId: location.id });
             return (
-              <Link key={location.id} to={`/request-event?${params.toString()}`} className="group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-xl">
+              <Link key={location.id} to={`/request-parking?${params.toString()}`} className="group overflow-hidden rounded-2xl border border-black/8 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-gold/60 hover:shadow-xl">
                 <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-marquee to-[#163A63]">
                   {location.image ? <img src={location.image} alt={`${location.venue} in ${location.city}, ${location.state}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" /> : <div className="flex h-full flex-col items-center justify-center px-6 text-center text-paper"><MapPin size={25} /><span className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold-light">Venue parking</span></div>}
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-10"><span className="text-xs font-semibold uppercase tracking-[0.14em] text-white/80">{location.region}</span></div>
@@ -88,3 +88,4 @@ export default function VenueDirectory() {
     </section>
   );
 }
+

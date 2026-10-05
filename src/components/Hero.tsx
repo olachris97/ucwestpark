@@ -39,7 +39,7 @@ export default function Hero() {
 
           <motion.div variants={item} className="mt-8 flex flex-wrap gap-4">
             <Link
-              to="/request-event"
+              to="/request-parking"
               className="rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-black transition-colors hover:bg-gold-light"
             >
               Request Parking
@@ -77,3 +77,4 @@ export default function Hero() {
     </section>
   );
 }
+

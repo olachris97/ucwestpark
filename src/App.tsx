@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import PublicLayout from "./layouts/PublicLayout";
 import Home from "./pages/Home";
 import RequestEvent from "./pages/RequestEvent";
+import SearchResults from "./pages/SearchResults";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import About from "./pages/About";
 import Support from "./pages/Support";
@@ -14,17 +15,18 @@ import Dashboard from "./pages/admin/Dashboard";
 import Requests from "./pages/admin/Requests";
 import Locations from "./pages/admin/Locations";
 import LocationForm from "./pages/admin/LocationForm";
-import Categories from "./pages/admin/Categories";
 
 export default function App() {
   return (
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchResults />} />
         <Route path="/about" element={<About />} />
-        <Route path="/request-event" element={<RequestEvent />} />
+        <Route path="/request-parking" element={<RequestEvent />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
         <Route path="/support" element={<Support />} />
+
         <Route
           path="/privacy-policy"
           element={
@@ -36,6 +38,7 @@ export default function App() {
             />
           }
         />
+
         <Route
           path="/terms"
           element={
@@ -47,6 +50,7 @@ export default function App() {
             />
           }
         />
+
         <Route path="*" element={<NotFound />} />
       </Route>
 
@@ -56,7 +60,6 @@ export default function App() {
         <Route path="locations" element={<Locations />} />
         <Route path="locations/new" element={<LocationForm />} />
         <Route path="locations/:id/edit" element={<LocationForm />} />
-        <Route path="categories" element={<Categories />} />
       </Route>
     </Routes>
   );

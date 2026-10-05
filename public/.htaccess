@@ -1,0 +1,31 @@
+# Makes client-side routing (React Router) work on Hostinger's Apache
+# hosting. Without this, refreshing or directly visiting a URL like
+# /admin or /events/some-event returns a 404 from the server, because
+# no such file actually exists — only index.html + JavaScript know how
+# to render those routes.
+#
+# This file lives in /public so `npm run build` copies it into /dist
+# automatically. No manual step needed beyond uploading dist/ as-is.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Let real files and folders (JS, CSS, images) be served normally.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Everything else falls through to index.html so React Router can
+  # take over.
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Optional but recommended: sensible caching for hashed static assets.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+</IfModule>

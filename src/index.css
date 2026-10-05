@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700;800&family=Lato:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-paper text-ink font-body antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+  :focus-visible {
+    outline: 2px solid #EAB648;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+
+  .input {
+    @apply w-full rounded-lg border border-paper-line bg-white px-3.5 py-2.5 text-sm text-ink outline-none transition placeholder:text-ink-soft/50 focus:border-gold-dark focus:ring-2 focus:ring-gold/20;
+  }
+}
+
+@layer utilities {
+  .ticket-notch-left::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background: #FFFFFF;
+  }
+  .ticket-notch-right::after {
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    background: #FFFFFF;
+  }
+  .perforated {
+    background-image: linear-gradient(to bottom, transparent 50%, #EAB648 50%);
+    background-size: 2px 12px;
+    background-repeat: repeat-y;
+  }
+  .perforated-h {
+    background-image: linear-gradient(to right, transparent 50%, #EAB648 50%);
+    background-size: 12px 2px;
+    background-repeat: repeat-x;
+  }
+}

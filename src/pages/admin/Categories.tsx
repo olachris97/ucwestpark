@@ -1,0 +1,17 @@
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
+import { Trash2, Plus } from "lucide-react";
+import { getCategories, addCategory, deleteCategory, getLocations } from "../../lib/store";
+import LoadingState from "../../components/LoadingState";
+import ErrorState from "../../components/ErrorState";
+import type { LocationItem } from "../../types";
+
+export default function Categories() {
+  const [regions,setRegions]=useState<string[]|null>(null); const [locations,setLocations]=useState<LocationItem[]>([]); const [error,setError]=useState(""); const [newRegion,setNewRegion]=useState(""); const [adding,setAdding]=useState(false); const [deletingName,setDeletingName]=useState<string|null>(null);
+  function load(){setError("");setRegions(null);Promise.all([getCategories(),getLocations()]).then(([c,l])=>{setRegions(c);setLocations(l);}).catch((err)=>setError(err.message||"Couldn't load regions."));}
+  useEffect(load,[]);
+  async function handleAdd(e:FormEvent){e.preventDefault();const name=newRegion.trim();if(!name)return;setAdding(true);setError("");try{await addCategory(name);setRegions((prev)=>prev?[...prev,name]:[name]);setNewRegion("");}catch(err){setError(err instanceof Error?err.message:"Couldn't add that region.");}finally{setAdding(false);}}
+  async function handleDelete(name:string){const count=locations.filter((l)=>l.region===name).length;if(!window.confirm(count?`${count} location${count===1?"":"s"} currently use "${name}". Remove the region anyway?`:`Remove the "${name}" region?`))return;setDeletingName(name);setError("");try{await deleteCategory(name);setRegions((prev)=>prev&&prev.filter((r)=>r!==name));}catch(err){setError(err instanceof Error?err.message:"Couldn't delete that region.");}finally{setDeletingName(null);}}
+  if(error&&!regions)return <ErrorState message={error} onRetry={load}/>;if(!regions)return <LoadingState label="Loading regions…"/>;
+  return <div><h1 className="font-display text-2xl font-semibold text-black sm:text-3xl">Regions</h1><p className="mt-1 text-sm text-ink-soft">Regions are the location categories used by the parking directory.</p>{error&&<p className="mt-2 text-sm text-red-500">{error}</p>}<form onSubmit={handleAdd} className="mt-6 flex max-w-md gap-2"><input value={newRegion} onChange={(e)=>setNewRegion(e.target.value)} placeholder="e.g. Southeast" className="flex-1 rounded-lg border border-paper-line bg-white px-3 py-2 text-sm focus:border-gold focus:outline-none"/><button type="submit" disabled={adding} className="flex items-center gap-1.5 rounded-lg bg-gold px-4 py-2 text-sm font-semibold text-black hover:bg-gold-light disabled:opacity-60"><Plus size={16}/>Add</button></form><div className="mt-6 max-w-md overflow-hidden rounded-xl border border-paper-line bg-white">{regions.map((region)=>{const count=locations.filter((l)=>l.region===region).length;return <div key={region} className="flex items-center justify-between border-b border-paper-line px-5 py-3 last:border-b-0"><div><p className="text-sm font-medium text-black">{region}</p><p className="text-xs text-ink-soft">{count} location{count===1?"":"s"}</p></div><button onClick={()=>handleDelete(region)} disabled={deletingName===region} className="rounded-lg border border-paper-line p-2 text-ink-soft hover:border-red-400 hover:text-red-500 disabled:opacity-50" aria-label={`Delete ${region}`}><Trash2 size={15}/></button></div>})}{regions.length===0&&<p className="px-5 py-10 text-center text-sm text-ink-soft">No regions yet.</p>}</div></div>;
+}

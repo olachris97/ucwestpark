@@ -1,9 +1,10 @@
 import { useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { saveContactMessage } from "../lib/store";
 import HoneypotField from "../components/HoneypotField";
+import { CONTACT } from "../data/contact";
 
 const faqs = [
   {
@@ -82,8 +83,8 @@ export default function Support() {
                   <Phone size={19} className="mt-0.5 text-gold-dark" />
                   <div>
                     <h3 className="font-display text-sm font-semibold text-ink">Call us</h3>
-                    <a href="tel:+16105550148" className="mt-1 block text-sm text-ink-soft hover:text-ink">
-                      +1 (610) 555-0148
+                    <a href={CONTACT.phoneHref} className="mt-1 block text-sm text-ink-soft hover:text-ink">
+                      {CONTACT.phoneDisplay}
                     </a>
                     <p className="mt-0.5 text-xs text-ink-soft/70">Mon–Sat, 9am–8pm ET</p>
                   </div>
@@ -95,10 +96,24 @@ export default function Support() {
                   <Mail size={19} className="mt-0.5 text-gold-dark" />
                   <div>
                     <h3 className="font-display text-sm font-semibold text-ink">Email us</h3>
-                    <a href="mailto:support@ucwestpark.com" className="mt-1 block text-sm text-ink-soft hover:text-ink">
-                      support@ucwestpark.com
+                    <a href={`mailto:${CONTACT.email}`} className="mt-1 block text-sm text-ink-soft hover:text-ink">
+                      {CONTACT.email}
                     </a>
                     <p className="mt-0.5 text-xs text-ink-soft/70">We reply within one business day</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-paper-line bg-white p-5">
+                <div className="flex items-start gap-3">
+                  <MapPin size={19} className="mt-0.5 text-gold-dark" />
+                  <div>
+                    <h3 className="font-display text-sm font-semibold text-ink">Visit us</h3>
+                    <a href={CONTACT.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-1 block text-sm text-ink-soft hover:text-ink">
+                      {CONTACT.addressLine1}
+                      <br />
+                      {CONTACT.addressLine2}
+                    </a>
                   </div>
                 </div>
               </div>
@@ -179,4 +194,3 @@ function Field({ label, children, className = "" }: { label: string; children: R
     </label>
   );
 }
-

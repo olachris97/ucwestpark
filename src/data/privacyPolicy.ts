@@ -1,5 +1,5 @@
-export const privacyPolicyIntro =
-  "This is a starting-point privacy policy, not legal advice. Have a lawyer review it before relying on it — especially if you plan to collect additional data, run ads, or operate outside the United States.";
+﻿export const privacyPolicyIntro =
+  "This is a starting-point privacy policy, not legal advice. Have a lawyer review it before relying on it â€” especially if you plan to collect additional data, run ads, or operate outside the United States.";
 
 export const privacyPolicySections = [
   {
@@ -7,7 +7,7 @@ export const privacyPolicySections = [
   },
   {
     heading: "Information We Collect",
-    body: "When you submit a parking request, an event request, or a contact message, we collect the information you provide directly, which may include your name, email address, phone number, event details, parking preferences, and any notes you add. We do not ask for or store payment card information through this website — any pricing or payment arrangements for parking are handled separately, directly with our team, once we've confirmed availability.",
+    body: "When you submit a parking request, an event request, or a contact message, we collect the information you provide directly, which may include your name, email address, phone number, event details, parking preferences, and any notes you add. We do not ask for or store payment card information through this website â€” any pricing or payment arrangements for parking are handled separately, directly with our team, once we've confirmed availability.",
   },
   {
     heading: "How We Use Your Information",
@@ -43,6 +43,6 @@ export const privacyPolicySections = [
   },
   {
     heading: "Contact Us",
-    body: "Questions about this policy or your information? Reach us through the Support page, or by email at support@ucwestpark.com.",
+    body: "Questions about this policy or your information? Reach us through the Support page, or by email at admin@ucwestpark.com, by phone at +1 301-541-8533, or by mail at 24 Veterans Square, Media, PA 19063.",
   },
 ];

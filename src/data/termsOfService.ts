@@ -1,5 +1,5 @@
 export const termsIntro =
-  "This is a starting-point terms of service, not legal advice. Have a lawyer review it before relying on it — especially the liability and dispute-resolution sections, which are highly state- and situation-specific.";
+  "This is a starting-point terms of service, not legal advice. Have a lawyer review it before relying on it â€” especially the liability and dispute-resolution sections, which are highly state- and situation-specific.";
 
 export const termsSections = [
   {
@@ -47,6 +47,6 @@ export const termsSections = [
   },
   {
     heading: "Contact Us",
-    body: "Questions about these Terms? Reach us through the Support page, or by email at support@ucwestpark.com.",
+    body: "Questions about these Terms? Reach us through the Support page, or by email at admin@ucwestpark.com, by phone at +1 301-541-8533, or by mail at 24 Veterans Square, Media, PA 19063.",
   },
 ];

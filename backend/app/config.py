@@ -17,9 +17,11 @@ class Config:
 
     RESEND_API_KEY = os.environ.get("RESEND_API_KEY", "")
     RESEND_FROM_EMAIL = os.environ.get(
-        "RESEND_FROM_EMAIL", "UCwestpark Tickets <onboarding@resend.dev>"
+        "RESEND_FROM_EMAIL", "UCwestpark Parking <onboarding@resend.dev>"
     )
-    ADMIN_NOTIFICATION_EMAIL = os.environ.get("ADMIN_NOTIFICATION_EMAIL", "")
+    ADMIN_NOTIFICATION_EMAIL = (
+        os.environ.get("ADMIN_NOTIFICATION_EMAIL", "").strip() or "admin@ucwestpark.com"
+    )
 
     PUBLIC_BASE_URL = os.environ.get("PUBLIC_BASE_URL", "")
 
